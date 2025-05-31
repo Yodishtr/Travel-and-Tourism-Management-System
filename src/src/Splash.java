@@ -5,11 +5,13 @@ import java.awt.*;
  *
  */
 
-public class Splash extends JFrame {
+public class Splash extends JFrame implements Runnable{
+    Thread thread;
 
     public Splash(){
         // setSize(1200, 600);
         // setLocation(150, 200);
+        setLocation(150, 200);
 
         setVisible(true);
 
@@ -20,18 +22,34 @@ public class Splash extends JFrame {
         add(image);
 
 
+        thread = new Thread(this);
+        thread.start();
 
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    }
+
+    public void run(){
+        try{
+            Thread.sleep(9000);
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        SwingUtilities.invokeLater(() -> {
+            dispose();
+            // new Login();
+        });
 
     }
 
     public static void main(String[] args){
         Splash frame = new Splash();
 
-        int x = 1;
-        for(int i = 1; i <= 200; x+= 7, i++){
-            frame.setLocation(i, i);
+
+        for(int i = 1; i <= 200; i++){
+
             frame.setSize(i * 6, i * 3);
             try{
                 Thread.sleep(20);
