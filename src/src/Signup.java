@@ -73,9 +73,9 @@ public class Signup extends JFrame {
         p1.add(tfsec_ans);
 
         JButton create = new JButton("Create User");
-        create.setFont(new Font("SAN_SERIF", Font.PLAIN, 14));
+        create.setFont(new Font("SAN_SERIF", Font.BOLD, 14));
         create.setBackground(Color.WHITE);
-        create.setForeground(Color.BLACK);
+        create.setForeground(new Color(131, 193, 233));
         create.setBounds(50, 250, 130, 30);
         create.setOpaque(true);
         create.setBorder(BorderFactory.createEmptyBorder());
@@ -83,15 +83,27 @@ public class Signup extends JFrame {
         p1.add(create);
 
         JButton back = new JButton("Back");
-        back.setFont(new Font("SAN_SERIF", Font.PLAIN, 14));
+        back.setFont(new Font("SAN_SERIF", Font.BOLD, 14));
         back.setBackground(Color.WHITE);
-        back.setForeground(Color.BLACK);
+        back.setForeground(new Color(131, 193, 233));
         back.setBounds(240, 250, 130, 30);
         back.setOpaque(true);
         back.setBorder(BorderFactory.createEmptyBorder());
         back.setBorderPainted(false);
         p1.add(back);
 
+        JPanel p2 = new JPanel();
+        p2.setBackground(Color.WHITE);
+        p2.setBounds(500, 0, 400, 400);
+        p2.setLayout(null);
+        add(p2);
+
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/signup.png"));
+        Image i2 = i1.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+        ImageIcon i3 = new ImageIcon(i2);
+        JLabel i4 = new JLabel(i3);
+        i4.setBounds(0, 0, 400, 400);
+        p2.add(i4);
 
 
 
