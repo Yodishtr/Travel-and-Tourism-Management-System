@@ -39,7 +39,7 @@ public class Splash extends JFrame implements Runnable{
         }
         SwingUtilities.invokeLater(() -> {
             dispose();
-            // new Login();
+            new Login();
         });
 
     }

@@ -1,11 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * A class handling the signup of a new user to the travel management system
  */
 
-public class Signup extends JFrame {
+public class Signup extends JFrame implements ActionListener {
+
+    private static JButton create;
+    private static JButton back;
+    private static JTextField tfusername, tfname, tfpassword, tfsec_ans;
+    private static Choice security;
 
     public Signup(){
         setBounds(350, 200, 900, 400);
@@ -23,7 +30,7 @@ public class Signup extends JFrame {
         lblusername.setBounds(50, 20, 125, 25);
         p1.add(lblusername);
 
-        JTextField tfusername = new JTextField();
+        tfusername = new JTextField();
         tfusername.setBounds(190, 20, 180, 25);
         tfusername.setBorder(BorderFactory.createEmptyBorder());
         p1.add(tfusername);
@@ -33,7 +40,7 @@ public class Signup extends JFrame {
         name.setBounds(50, 60, 125, 25);
         p1.add(name);
 
-        JTextField tfname = new JTextField();
+        tfname = new JTextField();
         tfname.setBounds(190, 60, 180, 25);
         tfname.setBorder(BorderFactory.createEmptyBorder());
         p1.add(tfname);
@@ -43,7 +50,7 @@ public class Signup extends JFrame {
         password.setBounds(50, 100, 125, 25);
         p1.add(password);
 
-        JTextField tfpassword = new JTextField();
+        tfpassword = new JTextField();
         tfpassword.setBounds(190, 100, 180, 25);
         tfpassword.setBorder(BorderFactory.createEmptyBorder());
         p1.add(tfpassword);
@@ -53,7 +60,7 @@ public class Signup extends JFrame {
         lblsecurity.setBounds(50, 140, 125, 25);
         p1.add(lblsecurity);
 
-        Choice security = new Choice();
+        security = new Choice();
         security.add("Fav series/movie character");
         security.add("Fav series/movies");
         security.add("Your lucky number");
@@ -67,12 +74,12 @@ public class Signup extends JFrame {
         sec_ans.setBounds(50, 180, 125, 25);
         p1.add(sec_ans);
 
-        JTextField tfsec_ans = new JTextField();
+        tfsec_ans = new JTextField();
         tfsec_ans.setBounds(190, 180, 180, 25);
         tfsec_ans.setBorder(BorderFactory.createEmptyBorder());
         p1.add(tfsec_ans);
 
-        JButton create = new JButton("Create User");
+        create = new JButton("Create User");
         create.setFont(new Font("SAN_SERIF", Font.BOLD, 14));
         create.setBackground(Color.WHITE);
         create.setForeground(new Color(131, 193, 233));
@@ -80,9 +87,10 @@ public class Signup extends JFrame {
         create.setOpaque(true);
         create.setBorder(BorderFactory.createEmptyBorder());
         create.setBorderPainted(false);
+        create.addActionListener(this);
         p1.add(create);
 
-        JButton back = new JButton("Back");
+        back = new JButton("Back");
         back.setFont(new Font("SAN_SERIF", Font.BOLD, 14));
         back.setBackground(Color.WHITE);
         back.setForeground(new Color(131, 193, 233));
@@ -90,6 +98,7 @@ public class Signup extends JFrame {
         back.setOpaque(true);
         back.setBorder(BorderFactory.createEmptyBorder());
         back.setBorderPainted(false);
+        back.addActionListener(this);
         p1.add(back);
 
         JPanel p2 = new JPanel();
@@ -106,10 +115,24 @@ public class Signup extends JFrame {
         p2.add(i4);
 
 
-
-
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public void actionPerformed(ActionEvent ae){
+        if (ae.getSource() == create){
+            String username = tfusername.getText();
+            String name = tfname.getText();
+            String password = tfpassword.getText();
+            String sec_ans = tfsec_ans.getText();
+            String security_question = security.getSelectedItem();
+
+        } else if (ae.getSource() == back){
+            SwingUtilities.invokeLater(() -> {
+                dispose();
+                new Login();
+            });
+        }
     }
 
     public static void main(String[] args){
