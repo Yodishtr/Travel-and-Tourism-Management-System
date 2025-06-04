@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 /**
  * A class handling the signup of a new user to the travel management system
@@ -126,6 +128,23 @@ public class Signup extends JFrame implements ActionListener {
             String password = tfpassword.getText();
             String sec_ans = tfsec_ans.getText();
             String security_question = security.getSelectedItem();
+
+            String query = "insert into account values('"+username+"', '"+name+"', " +
+                    "'"+password+"', '"+security_question+"', '"+sec_ans+"')";
+
+
+            try{
+                Conn conn = new Conn();
+                conn.s.executeUpdate(query);
+
+                JOptionPane.showMessageDialog(null, "Account Created Successfully");
+
+                dispose();
+                new Login();
+                Conn.conn.close();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
 
         } else if (ae.getSource() == back){
             SwingUtilities.invokeLater(() -> {

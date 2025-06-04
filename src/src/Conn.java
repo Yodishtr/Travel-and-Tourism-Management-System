@@ -6,14 +6,14 @@ import java.sql.Statement;
  * Class for connecting to the database.
  */
 
-public class Connect{
+public class Conn{
 
-    private static Connection conn;
+    public static Connection conn;
     private static final String url = "jdbc:postgresql://localhost:5432/travel";
     private static final String user = "yodishtrvythilingum";
     private static final String password = "";
     Statement s;
-    public Connect(){
+    public Conn(){
         try{
             Class.forName("org.postgresql.Driver");
             System.out.println("Connecting to database...");
