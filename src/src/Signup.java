@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 /**
  * A class handling the signup of a new user to the travel management system
@@ -135,15 +136,19 @@ public class Signup extends JFrame implements ActionListener {
 
             try{
                 Conn conn = new Conn();
-                conn.s.executeUpdate(query);
+                conn.s.executeUpdate(query); // We're updating the values in the table so its executeUpdate
 
                 JOptionPane.showMessageDialog(null, "Account Created Successfully");
 
                 dispose();
                 new Login();
                 Conn.conn.close();
-            } catch (Exception e){
-                e.printStackTrace();
+            } catch (SQLException e){
+                if (e.getMessage().contains("duplicate key value violates unique constraint")){
+                    JOptionPane.showMessageDialog(null, "Username already taken!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Account could not be created");
+                }
             }
 
         } else if (ae.getSource() == back){

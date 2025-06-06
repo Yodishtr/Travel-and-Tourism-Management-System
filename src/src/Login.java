@@ -1,11 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
 /**
  * A login class showing the Login Frame and with the associated functionality of enabling a user to login
  * or signup/create a new account if they previously didn't have one
  */
-public class Login extends JFrame {
+public class Login extends JFrame implements ActionListener {
+
+    public static JButton signup, login_button, forgot_password;
+    public static JTextField tfusername, tfpassword;
 
     public Login(){
         setSize(900, 400);
@@ -36,7 +42,7 @@ public class Login extends JFrame {
         lblusername.setFont(new Font("SAN_SERIF", Font.PLAIN, 20));
         p2.add(lblusername);
 
-        JTextField tfusername = new JTextField();
+        tfusername = new JTextField();
         tfusername.setBounds(60, 60, 300, 30);
         tfusername.setBorder(BorderFactory.createEmptyBorder());
         p2.add(tfusername);
@@ -46,36 +52,39 @@ public class Login extends JFrame {
         lblpassword.setFont(new Font("SAN_SERIF", Font.PLAIN, 20));
         p2.add(lblpassword);
 
-        JTextField tfpassword = new JTextField();
+        tfpassword = new JTextField();
         tfpassword.setBounds(60, 140, 300, 30);
         tfpassword.setBorder(BorderFactory.createEmptyBorder());
         p2.add(tfpassword);
 
-        JButton login = new JButton("Login");
-        login.setBounds(60, 200, 130, 30);
-        login.setBackground(new Color(131, 193, 233));
-        login.setForeground(Color.WHITE);
-        login.setBorder(BorderFactory.createEmptyBorder());
-        login.setOpaque(true);
-        login.setBorderPainted(false);
-        p2.add(login);
+        login_button = new JButton("Login");
+        login_button.setBounds(60, 200, 130, 30);
+        login_button.setBackground(new Color(131, 193, 233));
+        login_button.setForeground(Color.WHITE);
+        login_button.setBorder(BorderFactory.createEmptyBorder());
+        login_button.setOpaque(true);
+        login_button.setBorderPainted(false);
+        login_button.addActionListener(this);
+        p2.add(login_button);
 
-        JButton signup = new JButton("Sign Up");
+        signup = new JButton("Sign Up");
         signup.setBounds(230, 200, 130, 30);
         signup.setBackground(new Color(131, 193, 233));
         signup.setForeground(Color.WHITE);
         signup.setBorder(BorderFactory.createEmptyBorder());
         signup.setOpaque(true);
         signup.setBorderPainted(false);
+        signup.addActionListener(this);
         p2.add(signup);
 
-        JButton forgot_password = new JButton("Forgot Password");
+        forgot_password = new JButton("Forgot Password");
         forgot_password.setBounds(140, 240, 130, 30);
         forgot_password.setBackground(Color.WHITE);
         forgot_password.setForeground(Color.BLACK);
         forgot_password.setBorder(BorderFactory.createEmptyBorder());
         forgot_password.setOpaque(true);
         forgot_password.setBorderPainted(false);
+        forgot_password.addActionListener(this);
         p2.add(forgot_password);
 
         JLabel text = new JLabel("Trouble Signing in?");
@@ -92,6 +101,39 @@ public class Login extends JFrame {
 
     }
 
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == signup) {
+            SwingUtilities.invokeLater(() -> {
+               dispose();
+               new Signup();
+            });
+        } else if (ae.getSource() == login_button){
+            try{
+                String query = "SELECT username, password FROM account WHERE username = '" + tfusername.getText() + "'";
+                Conn connection  = new Conn();
+                ResultSet query_result = connection.s.executeQuery(query);
+                if (!query_result.next()){
+                    JOptionPane.showMessageDialog(null, "Invalid username or password");
+                } else {
+                    String input_password = tfpassword.getText();
+                    String username_password = query_result.getString("password");
+                    if (!input_password.equals(username_password)){
+                        JOptionPane.showMessageDialog(null, "Invalid username or password");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Welcome " + tfusername.getText());
+                        // add the next screen to go to by using Swing utilities
+                    }
+                }
+
+
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
+        } else if (ae.getSource() == forgot_password){
+
+        }
+    }
     public static void main(String[] args){
         Login login = new Login();
 

@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
 /**
  * Class implementing the forgot password feature
@@ -66,7 +67,7 @@ public class ForgotPassword extends JFrame implements ActionListener {
         p1.add(lbl_sec_question);
 
         security_question = new JTextField();
-        security_question.setBounds(220, 105, 150, 25);
+        security_question.setBounds(220, 105, 200, 25);
         security_question.setBorder(BorderFactory.createEmptyBorder());
         p1.add(security_question);
 
@@ -118,11 +119,34 @@ public class ForgotPassword extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae){
         if (ae.getSource() == search){
             try {
-                String query = "SELECT name, password, security_question, sec";
+                String query = "SELECT * FROM account WHERE username = '" + tfusername.getText() + "'";
+                Conn connection = new Conn();
+                ResultSet query_result = connection.s.executeQuery(query);// this time we are fetching info so its executeQuery
+                if (!query_result.next()){
+                    JOptionPane.showMessageDialog(null, "Username does not exist");
+                } else {
+                    tfname.setText(query_result.getString("name"));
+                    security_question.setText(query_result.getString("security_ques"));
+                }
+
             } catch (Exception e){
                 e.printStackTrace();
             }
         } else if (ae.getSource() == retrieve){
+            try{
+                String query = "SELECT * FROM account WHERE answer = '" + tfans.getText() + "' AND username = '"
+                        + tfusername.getText() + "'";
+                Conn connection = new Conn();
+                ResultSet query_result = connection.s.executeQuery(query);
+                if (!query_result.next()){
+                    JOptionPane.showMessageDialog(null, "Wrong answer");
+                } else {
+                    tfpassword.setText(query_result.getString("password"));
+                }
+
+            } catch (Exception e){
+                e.printStackTrace();
+            }
 
         } else if (ae.getSource() == back){
             SwingUtilities.invokeLater(() -> {
