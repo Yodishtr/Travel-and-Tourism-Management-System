@@ -131,7 +131,10 @@ public class Login extends JFrame implements ActionListener {
             }
 
         } else if (ae.getSource() == forgot_password){
-
+            SwingUtilities.invokeLater(() -> {
+                dispose();
+                new ForgotPassword();
+            });
         }
     }
     public static void main(String[] args){
