@@ -9,8 +9,11 @@ public class Loading extends JFrame implements Runnable{
 
     Thread thread;
     JProgressBar progressBar;
+    String username;
 
-    public Loading(){
+    public Loading(String username){
+        this.username = username;
+        thread = new Thread(this);
         setBounds(500, 200, 650, 400);
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
@@ -31,14 +34,14 @@ public class Loading extends JFrame implements Runnable{
         progressLabel.setFont(new Font("Raleway", Font.BOLD, 15));
         add(progressLabel);
 
-        JLabel user_name = new JLabel("Happy to see you again Sully");
-        user_name.setBounds(200, 200, 400, 40);
+        JLabel user_name = new JLabel("Happy to see you again " + username);
+        user_name.setBounds(190, 200, 400, 40);
         user_name.setForeground(Color.black);
         user_name.setFont(new Font("Calibri", Font.BOLD, 15));
         add(user_name);
 
 
-
+        thread.start();
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
@@ -47,7 +50,18 @@ public class Loading extends JFrame implements Runnable{
         try {
             for (int i = 1; i <= 101; i++){
                 int max = progressBar.getMaximum();
+                int value = progressBar.getValue();
 
+                if (value < max){
+                    progressBar.setValue(value + 1);
+                } else {
+                    progressBar.setValue(max);
+                    SwingUtilities.invokeLater(() -> {
+                        dispose();
+                        // add new object class here
+                    });
+                }
+                Thread.sleep(100);
             }
 
         } catch (Exception e){
@@ -56,6 +70,6 @@ public class Loading extends JFrame implements Runnable{
     }
 
     public static void main(String[] args){
-        new Loading();
+        new Loading("Bomboclaat");
     }
 }

@@ -121,7 +121,7 @@ public class Login extends JFrame implements ActionListener {
                         JOptionPane.showMessageDialog(null, "Invalid username or password");
                     } else {
                         JOptionPane.showMessageDialog(null, "Welcome " + tfusername.getText());
-                        // add the next screen to go to by using Swing utilities
+                        new Loading(tfusername.getText());
                     }
                 }
 
