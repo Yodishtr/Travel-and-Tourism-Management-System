@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 
 /**
@@ -63,8 +65,33 @@ public class Login extends JFrame implements ActionListener {
         login_button.setForeground(Color.WHITE);
         login_button.setBorder(BorderFactory.createEmptyBorder());
         login_button.setOpaque(true);
-        login_button.setBorderPainted(false);
+        // login_button.setBorderPainted(false);
         login_button.addActionListener(this);
+        login_button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e){
+                login_button.setBackground(new Color(161, 213, 243));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e){
+                login_button.setBackground(new Color(131, 193, 233));
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e){
+                login_button.setBackground(new Color(101, 163, 203));
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e){
+                if (login_button.getBounds().contains(e.getPoint())){
+                    login_button.setBackground(new Color(161, 213, 243));
+                } else {
+                    login_button.setBackground(new Color(131, 193, 233));
+                }
+            }
+        });
         p2.add(login_button);
 
         signup = new JButton("Sign Up");
@@ -73,8 +100,32 @@ public class Login extends JFrame implements ActionListener {
         signup.setForeground(Color.WHITE);
         signup.setBorder(BorderFactory.createEmptyBorder());
         signup.setOpaque(true);
-        signup.setBorderPainted(false);
         signup.addActionListener(this);
+        signup.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e){
+                signup.setBackground(new Color(161, 213, 243));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e){
+                signup.setBackground(new Color(131, 193, 233));
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e){
+                signup.setBackground(new Color(101, 163, 203));
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e){
+                if (signup.getBounds().contains(e.getPoint())){
+                    signup.setBackground(new Color(161, 213, 243));
+                } else {
+                    signup.setBackground(new Color(131, 193, 233));
+                }
+            }
+        });
         p2.add(signup);
 
         forgot_password = new JButton("Forgot Password");
@@ -83,8 +134,32 @@ public class Login extends JFrame implements ActionListener {
         forgot_password.setForeground(Color.BLACK);
         forgot_password.setBorder(BorderFactory.createEmptyBorder());
         forgot_password.setOpaque(true);
-        forgot_password.setBorderPainted(false);
         forgot_password.addActionListener(this);
+        forgot_password.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e){
+                forgot_password.setBackground(new Color(230, 230, 230));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e){
+                forgot_password.setBackground(Color.WHITE);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e){
+                forgot_password.setBackground(new Color(200, 200, 200));
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e){
+                if (forgot_password.getBounds().contains(e.getPoint())){
+                    forgot_password.setBackground(new Color(230, 230, 230));
+                } else {
+                    forgot_password.setBackground(Color.WHITE);
+                }
+            }
+        });
         p2.add(forgot_password);
 
         JLabel text = new JLabel("Trouble Signing in?");
