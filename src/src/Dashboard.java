@@ -595,12 +595,18 @@ public class Dashboard extends JFrame implements ActionListener {
         mainImage.setBounds(0, 0, 1100, 800);
         p3.add(mainImage);
 
+        JLabel image_text = new JLabel("Travel Management System");
+        image_text.setBounds(50, 30, 1000, 70);
+        image_text.setForeground(Color.WHITE);
+        image_text.setFont(new Font("Raleway", Font.BOLD, 40));
+        mainImage.add(image_text);
+
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public void actionPerformed(ActionEvent ae){
-        //
+
     }
 
 
