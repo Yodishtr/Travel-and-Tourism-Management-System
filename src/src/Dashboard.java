@@ -14,7 +14,10 @@ public class Dashboard extends JFrame implements ActionListener {
     checkPackages, bookPackages, viewPackage, viewHotels, bookHotel, viewBookedHotel, destination, payment, calculator,
             notepad, aboutButton;
 
-    public Dashboard(){
+    private String username;
+
+    public Dashboard(String username){
+        this.username = username;
         setBounds(0, 0, 1400, 1000);
         // setExtendedState(JFrame.MAXIMIZED_BOTH); to be used if you dont know your screen size and make the frame take up the full screen
         setLayout(null);
@@ -606,11 +609,11 @@ public class Dashboard extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent ae){
-
+        // will be used to implement the buttons. make this frame invisble and dont dispose it when clicking on buttons
     }
 
 
     public static void main(String[] args){
-        new Dashboard();
+        new Dashboard("");
     }
 }
