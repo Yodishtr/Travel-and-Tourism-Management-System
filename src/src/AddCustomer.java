@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Class representing the frame for the add personal details button from the app dashboard
@@ -199,7 +200,7 @@ public class AddCustomer extends JFrame implements ActionListener {
 
         try{
             Conn connection = new Conn();
-            ResultSet rs = connection.s.executeQuery("SELECT * FROM account WHERE username = ");
+            ResultSet rs = connection.s.executeQuery("SELECT * FROM account WHERE username = '"+ this.username+"'");
             rs.next();
             labelusername.setText(rs.getString("username"));
             labelname.setText(rs.getString("name"));
@@ -213,17 +214,48 @@ public class AddCustomer extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == add){
+            String user_name = labelusername.getText();
+            String id = (String) comboID.getSelectedItem();
+            String number = tfnumber_id.getText();
+            String name = labelname.getText();
+            String gender;
+            if (rman.isSelected()){
+                gender = "Male";
+            } else if (rwoman.isSelected()){
+                gender = "Female";
+            } else{
+                gender = "Other";
+            }
+            String country = tfcountry.getText();
+            String address = tfaddress.getText();
+            String email = tfemail.getText();
+            String phone = tfphone.getText();
+
+            try{
+                Conn conn = new Conn();
+                String query = "INSERT INTO customer VALUES ('" + user_name + "', '"+ id +"', '"+ number +"', '"+ name +"', '"+
+                        gender +"', '"+ country +"', '"+ address +"', '"+ phone +"', '"+ email +"')";
+                conn.s.executeUpdate(query);
+                JOptionPane.showMessageDialog(null, "Customer Details Added Successfully");
+                SwingUtilities.invokeLater(() -> {
+                    dispose();
+                });
+
+            } catch (SQLException ee){
+                System.out.println("SQL State: " + ee.getSQLState());
+                System.out.println("Message: " + ee.getMessage());
+            }
 
         } else{
             SwingUtilities.invokeLater(() -> {
                 dispose();
-                new Dashboard(username);
+
             });
         }
     }
 
 
     public static void main(String[] args){
-        new AddCustomer("");
+        new AddCustomer("Sully");
     }
 }
