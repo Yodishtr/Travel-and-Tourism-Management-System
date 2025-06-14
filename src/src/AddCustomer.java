@@ -249,7 +249,6 @@ public class AddCustomer extends JFrame implements ActionListener {
         } else{
             SwingUtilities.invokeLater(() -> {
                 dispose();
-
             });
         }
     }
