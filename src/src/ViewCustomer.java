@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.ResultSet;
 
 /**
  * Class representing the frame for the view personal details button on the dashboard
@@ -184,6 +185,29 @@ public class ViewCustomer extends JFrame implements ActionListener {
         JLabel image_1 = new JLabel(i6);
         image_1.setBounds(600, 400, 600, 200);
         add(image_1);
+
+        try{
+            Conn conn = new Conn();
+            String query = "SELECT * FROM customer WHERE username = '"+ this.username +"'";
+            ResultSet rs = conn.s.executeQuery(query);
+            if (!rs.next()){
+                JOptionPane.showMessageDialog(null, "Customer Not Found");
+            } else{
+                label_username.setText(rs.getString("username"));
+                label_IdType.setText(rs.getString("id_type"));
+                label_IdNumber.setText(rs.getString("id_number"));
+                label_Name.setText(rs.getString("name"));
+                label_Gender.setText(rs.getString("gender"));
+                label_Country.setText(rs.getString("country"));
+                label_Address.setText(rs.getString("address"));
+                label_Phone.setText(rs.getString("phone"));
+                label_Email.setText(rs.getString("email"));
+                
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

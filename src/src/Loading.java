@@ -58,7 +58,7 @@ public class Loading extends JFrame implements Runnable{
                     progressBar.setValue(max);
                     SwingUtilities.invokeLater(() -> {
                         dispose();
-                        new Dashboard(username); // add new object class here
+                        new Dashboard(username); // update new object class here
                     });
                 }
                 Thread.sleep(100);

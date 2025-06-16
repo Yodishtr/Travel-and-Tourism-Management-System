@@ -8,24 +8,29 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Class representing the frame for the update personal details button from the app dashboard
+ * A class representing the update personal details from the dashboard and allows the user
+ * to modify their personal details
  */
 
-public class AddCustomer extends JFrame implements ActionListener {
-
+public class UpdateCustomer extends JFrame implements ActionListener {
     JLabel labelusername, labelname;
-    JComboBox comboID;
-    JTextField tfnumber_id, tfcountry, tfaddress, tfemail, tfphone;
-    JRadioButton rman, rwoman, rother;
-    JButton add, back;
+//    JComboBox comboID;
+    JTextField tfnumber_id, tfcountry, tfaddress, tfemail, tfphone, tfid_type, tfgender;
+//    JRadioButton rman, rwoman, rother;
+    JButton update, back;
 
     private String username;
-
-    public AddCustomer(String username){
+    public UpdateCustomer(String username){
         this.username = username;
-        setBounds(450, 200, 850, 550);
+        setBounds(500, 200, 850, 550);
         setLayout(null);
         getContentPane().setBackground(Color.WHITE);
+
+
+        JLabel heading = new JLabel("Update Personal Details");
+        heading.setBounds(300, 0, 300, 25);
+        heading.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        add(heading);
 
         JLabel lblusername = new JLabel("Username");
         lblusername.setBounds(30, 50, 150, 25);
@@ -41,11 +46,15 @@ public class AddCustomer extends JFrame implements ActionListener {
         lblid.setFont(new Font("Times New Roman", Font.BOLD, 16));
         add(lblid);
 
-        comboID = new JComboBox(new String[] {"Passport", "Driver's License", "Health Card", "PR Card"});
-        comboID.setBounds(220, 90, 150, 25);
-        comboID.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-        comboID.setBackground(Color.WHITE);
-        add(comboID);
+//        comboID = new JComboBox(new String[] {"Passport", "Driver's License", "Health Card", "PR Card"});
+//        comboID.setBounds(220, 90, 150, 25);
+//        comboID.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+//        comboID.setBackground(Color.WHITE);
+//        add(comboID);
+
+        tfid_type = new JTextField();
+        tfid_type.setBounds(220, 90, 150, 25);
+        add(tfid_type);
 
         JLabel lblnumber_id = new JLabel("Your ID Number");
         lblnumber_id.setBounds(30, 130, 150, 25);
@@ -70,22 +79,26 @@ public class AddCustomer extends JFrame implements ActionListener {
         lblgender.setFont(new Font("Times New Roman", Font.BOLD, 16));
         add(lblgender);
 
-        rman = new JRadioButton("Man");
-        rman.setBounds(190, 210, 70, 25);
-        add(rman);
+        tfgender = new JTextField();
+        tfgender.setBounds(220, 210, 150, 25);
+        add(tfgender);
 
-        rwoman = new JRadioButton("Woman");
-        rwoman.setBounds(270, 210, 100, 25);
-        add(rwoman);
-
-        rother = new JRadioButton("Other");
-        rother.setBounds(370, 210, 70, 25);
-        add(rother);
-
-        ButtonGroup bg = new ButtonGroup();
-        bg.add(rman);
-        bg.add(rwoman);
-        bg.add(rother);
+//        rman = new JRadioButton("Man");
+//        rman.setBounds(190, 210, 70, 25);
+//        add(rman);
+//
+//        rwoman = new JRadioButton("Woman");
+//        rwoman.setBounds(270, 210, 100, 25);
+//        add(rwoman);
+//
+//        rother = new JRadioButton("Other");
+//        rother.setBounds(370, 210, 70, 25);
+//        add(rother);
+//
+//        ButtonGroup bg = new ButtonGroup();
+//        bg.add(rman);
+//        bg.add(rwoman);
+//        bg.add(rother);
 
         JLabel lblcountry = new JLabel("Your Country");
         lblcountry.setBounds(30, 250, 150, 25);
@@ -123,39 +136,39 @@ public class AddCustomer extends JFrame implements ActionListener {
         tfphone.setBounds(220, 370, 150, 25);
         add(tfphone);
 
-        add = new JButton("Add");
-        add.setBackground(Color.GRAY);
-        add.setForeground(Color.WHITE);
-        add.setOpaque(true);
-        add.setBounds(30, 420, 100, 25);
-        add.setBorder(BorderFactory.createEmptyBorder());
-        add.addActionListener(this);
-        add.addMouseListener(new MouseAdapter() {
+        update = new JButton("Update");
+        update.setBackground(Color.GRAY);
+        update.setForeground(Color.WHITE);
+        update.setOpaque(true);
+        update.setBounds(30, 420, 100, 25);
+        update.setBorder(BorderFactory.createEmptyBorder());
+        update.addActionListener(this);
+        update.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e){
-                add.setBackground(Color.LIGHT_GRAY);
+                update.setBackground(Color.LIGHT_GRAY);
             }
 
             @Override
             public void mouseExited(MouseEvent e){
-                add.setBackground(Color.GRAY);
+                update.setBackground(Color.GRAY);
             }
 
             @Override
             public void mousePressed(MouseEvent e){
-                add.setBackground(Color.DARK_GRAY);
+                update.setBackground(Color.DARK_GRAY);
             }
 
             @Override
             public void mouseReleased(MouseEvent e){
-                if (add.getBounds().contains(e.getPoint())){
-                    add.setBackground(Color.LIGHT_GRAY);
+                if (update.getBounds().contains(e.getPoint())){
+                    update.setBackground(Color.LIGHT_GRAY);
                 } else{
-                    add.setBackground(Color.GRAY);
+                    update.setBackground(Color.GRAY);
                 }
             }
         });
-        add(add);
+        add(update);
 
         back = new JButton("Back");
         back.setBackground(Color.BLACK);
@@ -191,8 +204,8 @@ public class AddCustomer extends JFrame implements ActionListener {
         });
         add(back);
 
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/newcustomer.jpg"));
-        Image i2 = i1.getImage().getScaledInstance(370, 600, Image.SCALE_SMOOTH);
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/update.png"));
+        Image i2 = i1.getImage().getScaledInstance(370, 450, Image.SCALE_SMOOTH);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel image = new JLabel(i3);
         image.setBounds(450, 40, 400, 450);
@@ -200,10 +213,20 @@ public class AddCustomer extends JFrame implements ActionListener {
 
         try{
             Conn connection = new Conn();
-            ResultSet rs = connection.s.executeQuery("SELECT * FROM account WHERE username = '"+ this.username+"'");
-            rs.next();
-            labelusername.setText(rs.getString("username"));
-            labelname.setText(rs.getString("name"));
+            ResultSet rs = connection.s.executeQuery("SELECT * FROM customer WHERE username = '"+ this.username+"'");
+            if (!rs.next()){
+                JOptionPane.showMessageDialog(null, "Customer details not found");
+            } else {
+                labelusername.setText(rs.getString("username"));
+                labelname.setText(rs.getString("name"));
+                tfid_type.setText(rs.getString("id_type"));
+                tfnumber_id.setText(rs.getString("id_number"));
+                tfgender.setText(rs.getString("gender"));
+                tfcountry.setText(rs.getString("country"));
+                tfaddress.setText(rs.getString("address"));
+                tfphone.setText(rs.getString("phone"));
+                tfemail.setText(rs.getString("email"));
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -213,19 +236,12 @@ public class AddCustomer extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e){
-        if (e.getSource() == add){
+        if (e.getSource() == update){
             String user_name = labelusername.getText();
-            String id = (String) comboID.getSelectedItem();
+            String id = tfid_type.getText();
             String number = tfnumber_id.getText();
             String name = labelname.getText();
-            String gender;
-            if (rman.isSelected()){
-                gender = "Male";
-            } else if (rwoman.isSelected()){
-                gender = "Female";
-            } else{
-                gender = "Other";
-            }
+            String gender = tfgender.getText();
             String country = tfcountry.getText();
             String address = tfaddress.getText();
             String email = tfemail.getText();
@@ -233,10 +249,10 @@ public class AddCustomer extends JFrame implements ActionListener {
 
             try{
                 Conn conn = new Conn();
-                String query = "INSERT INTO customer VALUES ('" + user_name + "', '"+ id +"', '"+ number +"', '"+ name +"', '"+
-                        gender +"', '"+ country +"', '"+ address +"', '"+ phone +"', '"+ email +"')";
+                String query = "UPDATE customer set username ='" + user_name + "', id_type ='"+ id +"', id_number ='"+ number +"', name ='"+ name +"', gender='"+
+                        gender +"', country='"+ country +"', address='"+ address +"', phone='"+ phone +"', email='"+ email +"'";
                 conn.s.executeUpdate(query);
-                JOptionPane.showMessageDialog(null, "Customer Details Added Successfully");
+                JOptionPane.showMessageDialog(null, "Customer Details Updated Successfully");
                 SwingUtilities.invokeLater(() -> {
                     dispose();
                 });
@@ -253,8 +269,7 @@ public class AddCustomer extends JFrame implements ActionListener {
         }
     }
 
-
     public static void main(String[] args){
-        new AddCustomer("Sully");
+        new UpdateCustomer("Sully");
     }
 }
