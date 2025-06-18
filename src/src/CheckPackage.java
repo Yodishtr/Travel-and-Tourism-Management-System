@@ -80,7 +80,7 @@ public class CheckPackage extends JFrame {
         label5.setForeground(Color.BLACK);
         p1.add(label5);
 
-        JLabel label5_1 = new JLabel("Price Upon Request");
+        JLabel label5_1 = new JLabel("$50K");
         label5_1.setBounds(150, 430, 200, 30);
         label5_1.setFont(new Font("Serif", Font.PLAIN, 18));
         label5_1.setForeground(Color.WHITE);
@@ -161,7 +161,7 @@ public class CheckPackage extends JFrame {
         label5_p2.setForeground(Color.BLACK);
         p2.add(label5_p2);
 
-        JLabel label5_1_p2 = new JLabel("$4000");
+        JLabel label5_1_p2 = new JLabel("$20k");
         label5_1_p2.setBounds(150, 430, 200, 30);
         label5_1_p2.setFont(new Font("Serif", Font.PLAIN, 18));
         label5_1_p2.setForeground(Color.WHITE);
@@ -244,7 +244,7 @@ public class CheckPackage extends JFrame {
         label5_p3.setForeground(Color.BLACK);
         p3.add(label5_p3);
 
-        JLabel label5_1_p3 = new JLabel("$1000");
+        JLabel label5_1_p3 = new JLabel("$10k");
         label5_1_p3.setBounds(150, 430, 200, 30);
         label5_1_p3.setFont(new Font("Serif", Font.PLAIN, 18));
         label5_1_p3.setForeground(Color.WHITE);
