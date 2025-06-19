@@ -232,6 +232,13 @@ public class BookPackage extends JFrame implements ActionListener {
         });
         add(back);
 
+       ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/bookpackage.jpg"));
+       Image i2 = i1.getImage().getScaledInstance(500, 300, Image.SCALE_DEFAULT);
+       ImageIcon i3 = new ImageIcon(i2);
+       JLabel image = new JLabel(i3);
+       image.setBounds(550, 50, 500, 300);
+       add(image);
+
 
 
 
@@ -265,8 +272,13 @@ public class BookPackage extends JFrame implements ActionListener {
         } else{
             try{
                 Conn conn = new Conn();
+                conn.s.executeUpdate("INSERT INTO bookpackage VALUES('"+ label_username.getText() +"', '"+
+                        cpackage.getSelectedItem().toString() +"', '"+ tfpersonTotal.getText() +"', '"+
+                        label_id.getText() +"', '"+ label_idNumber.getText() +"')");
+                JOptionPane.showMessageDialog(null, "Booking Added Successfully");
+                dispose();
             } catch (Exception ex) {
-                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error: Booking could not be added");
             }
         }
     }

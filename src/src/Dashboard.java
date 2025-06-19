@@ -618,6 +618,8 @@ public class Dashboard extends JFrame implements ActionListener {
             new UpdateCustomer(username);
         } else if(ae.getSource() == checkPackages){
             new CheckPackage();
+        } else if (ae.getSource() == bookPackages){
+            new BookPackage(username);
         }
     }
 
