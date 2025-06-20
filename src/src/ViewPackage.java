@@ -40,7 +40,7 @@ public class ViewPackage extends JFrame implements ActionListener {
         label_username.setFont(new Font("Tahoma", Font.BOLD, 15));
         add(label_username);
 
-        // ID type label
+        // Package type label
         JLabel package_type = new JLabel("Package Type: ");
         package_type.setForeground(Color.BLACK);
         package_type.setBounds(30, 110, 150, 25);
@@ -79,8 +79,8 @@ public class ViewPackage extends JFrame implements ActionListener {
         label_persons.setFont(new Font("Tahoma", Font.BOLD, 15));
         add(label_persons);
 
-        // Gender
-        JLabel id = new JLabel("Gender: ");
+        // ID type
+        JLabel id = new JLabel("ID type: ");
         id.setForeground(Color.BLACK);
         id.setBounds(30, 290, 150, 25);
         id.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -92,57 +92,60 @@ public class ViewPackage extends JFrame implements ActionListener {
         label_id.setFont(new Font("Tahoma", Font.BOLD, 15));
         add(label_id);
 
-        // Country
-        JLabel country = new JLabel("Country: ");
-        country.setForeground(Color.BLACK);
-        country.setBounds(500, 50, 150, 25);
-        country.setFont(new Font("Tahoma", Font.BOLD, 15));
-        add(country);
+        // Price
+        JLabel price = new JLabel("Price: ");
+        price.setForeground(Color.BLACK);
+        price.setBounds(500, 50, 150, 25);
+        price.setFont(new Font("Tahoma", Font.BOLD, 15));
+        add(price);
 
-        JLabel label_Country = new JLabel();
-        label_Country.setForeground(Color.BLACK);
-        label_Country.setBounds(690, 50, 150, 25);
-        label_Country.setFont(new Font("Tahoma", Font.BOLD, 15));
-        add(label_Country);
+        JLabel label_price = new JLabel();
+        label_price.setForeground(Color.BLACK);
+        label_price.setBounds(690, 50, 150, 25);
+        label_price.setFont(new Font("Tahoma", Font.BOLD, 15));
+        add(label_price);
+
+        // Image
+
 
         // Address
-        JLabel address = new JLabel("Address: ");
-        address.setForeground(Color.BLACK);
-        address.setBounds(500, 110, 150, 25);
-        address.setFont(new Font("Tahoma", Font.BOLD, 15));
-        add(address);
-
-        JLabel label_Address = new JLabel();
-        label_Address.setForeground(Color.BLACK);
-        label_Address.setBounds(690, 110, 150, 25);
-        label_Address.setFont(new Font("Tahoma", Font.BOLD, 15));
-        add(label_Address);
-
-        // Email
-        JLabel email = new JLabel("Email: ");
-        email.setForeground(Color.BLACK);
-        email.setBounds(500, 170, 150, 25);
-        email.setFont(new Font("Tahoma", Font.BOLD, 15));
-        add(email);
-
-        JLabel label_Email = new JLabel();
-        label_Email.setForeground(Color.BLACK);
-        label_Email.setBounds(690, 170, 150, 25);
-        label_Email.setFont(new Font("Tahoma", Font.BOLD, 15));
-        add(label_Email);
-
-        // Phone
-        JLabel phone = new JLabel("Phone: ");
-        phone.setForeground(Color.BLACK);
-        phone.setBounds(500, 230, 150, 25);
-        phone.setFont(new Font("Tahoma", Font.BOLD, 15));
-        add(phone);
-
-        JLabel label_Phone = new JLabel();
-        label_Phone.setForeground(Color.BLACK);
-        label_Phone.setBounds(690, 230, 150, 25);
-        label_Phone.setFont(new Font("Tahoma", Font.BOLD, 15));
-        add(label_Phone);
+//        JLabel address = new JLabel("Address: ");
+//        address.setForeground(Color.BLACK);
+//        address.setBounds(500, 110, 150, 25);
+//        address.setFont(new Font("Tahoma", Font.BOLD, 15));
+//        add(address);
+//
+//        JLabel label_Address = new JLabel();
+//        label_Address.setForeground(Color.BLACK);
+//        label_Address.setBounds(690, 110, 150, 25);
+//        label_Address.setFont(new Font("Tahoma", Font.BOLD, 15));
+//        add(label_Address);
+//
+//        // Email
+//        JLabel email = new JLabel("Email: ");
+//        email.setForeground(Color.BLACK);
+//        email.setBounds(500, 170, 150, 25);
+//        email.setFont(new Font("Tahoma", Font.BOLD, 15));
+//        add(email);
+//
+//        JLabel label_Email = new JLabel();
+//        label_Email.setForeground(Color.BLACK);
+//        label_Email.setBounds(690, 170, 150, 25);
+//        label_Email.setFont(new Font("Tahoma", Font.BOLD, 15));
+//        add(label_Email);
+//
+//        // Phone
+//        JLabel phone = new JLabel("Phone: ");
+//        phone.setForeground(Color.BLACK);
+//        phone.setBounds(500, 230, 150, 25);
+//        phone.setFont(new Font("Tahoma", Font.BOLD, 15));
+//        add(phone);
+//
+//        JLabel label_Phone = new JLabel();
+//        label_Phone.setForeground(Color.BLACK);
+//        label_Phone.setBounds(690, 230, 150, 25);
+//        label_Phone.setFont(new Font("Tahoma", Font.BOLD, 15));
+//        add(label_Phone);
 
         back = new JButton("Back");
         back.setBounds(350, 350, 110, 25);
@@ -193,15 +196,41 @@ public class ViewPackage extends JFrame implements ActionListener {
                 label_persons.setText(rs.getString("persons"));
                 label_id.setText(rs.getString("id"));
 
+                int party_size = Integer.valueOf(label_persons.getText());
                 String chosen_package = label_packageType.getText();
                 if (chosen_package.equals("Gold Package")){
+                    int cost = 50;
+                    cost *= party_size;
+                    label_price.setText("$" + cost + "k");
+                    ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/package1.jpg"));
+                    Image i2 = i1.getImage().getScaledInstance(340, 195, Image.SCALE_SMOOTH);
+                    ImageIcon i3 = new ImageIcon(i2);
+                    JLabel goldImage = new JLabel(i3);
+                    goldImage.setBounds(500, 110, 340, 195);
+                    add(goldImage);
 
+                } else if (chosen_package.equals("Silver Package")){
+                    int cost = 20;
+                    cost *= party_size;
+                    label_price.setText("$" + cost + "k");
+                    ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/package2.jpg"));
+                    Image i2 = i1.getImage().getScaledInstance(340, 195, Image.SCALE_SMOOTH);
+                    ImageIcon i3 = new ImageIcon(i2);
+                    JLabel silverImage = new JLabel(i3);
+                    silverImage.setBounds(500, 110, 340, 195);
+                    add(silverImage);
+
+                } else{
+                    int cost = 10;
+                    cost *= party_size;
+                    label_price.setText("$" + cost + "k");
+                    ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/package3.jpg"));
+                    Image i2 = i1.getImage().getScaledInstance(340, 195, Image.SCALE_SMOOTH);
+                    ImageIcon i3 = new ImageIcon(i2);
+                    JLabel regularImage = new JLabel(i3);
+                    regularImage.setBounds(500, 110, 340, 195);
+                    add(regularImage);
                 }
-
-                label_Country.setText(rs.getString("country"));
-                label_Address.setText(rs.getString("address"));
-                label_Phone.setText(rs.getString("phone"));
-                label_Email.setText(rs.getString("email"));
 
             }
 

@@ -620,6 +620,8 @@ public class Dashboard extends JFrame implements ActionListener {
             new CheckPackage();
         } else if (ae.getSource() == bookPackages){
             new BookPackage(username);
+        } else if(ae.getSource() == viewPackage){
+            new ViewPackage(username);
         }
     }
 
