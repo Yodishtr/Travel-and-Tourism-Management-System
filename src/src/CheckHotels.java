@@ -47,7 +47,7 @@ public class CheckHotels extends JFrame implements Runnable{
         t1.start();
 
         setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     public void run(){
