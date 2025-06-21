@@ -609,7 +609,7 @@ public class Dashboard extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent ae){
-        // will be used to implement the buttons. make this frame invisble and dont dispose it when clicking on buttons
+        // will be used to implement the buttons. make the dahsboard still apparent just make the buttons create small frames
         if (ae.getSource() == addPersonalDetails){
             new AddCustomer(username);
         } else if (ae.getSource() == viewPersonalDetails){
