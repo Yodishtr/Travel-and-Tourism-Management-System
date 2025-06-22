@@ -1,6 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * Class for connecting to the database.
@@ -27,5 +25,9 @@ public class Conn{
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public PreparedStatement prepareStatement(String sql) throws SQLException {
+        return conn.prepareStatement(sql);
     }
 }
